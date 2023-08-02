@@ -59,7 +59,7 @@ int	main(int ac, char **av)
 	struct sigaction	st_signal;
 
 	if (ac != 3)
-		exit(write(1, "\033[31mInvalid input\033[0m\n", 24));
+		exit(write(2, "\033[31mInvalid input\033[0m\n", 24));
 	ac = -1;
 	while (av[1][++ac])
 		if (!(av[1][ac] >= '0' && av[1][ac] <= '9'))
@@ -71,9 +71,9 @@ int	main(int ac, char **av)
 	st_signal.sa_handler = &sig_handler;
 	st_signal.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &st_signal, NULL) == -1)
-		write(1, "Failed to change SIGUSR1's behavior", 35);
+		write(2, "Failed to change SIGUSR1's behavior", 35);
 	if (sigaction(SIGUSR2, &st_signal, NULL) == -1)
-		write(1, "Failed to change SIGUSR2's behavior", 35);
+		write(2, "Failed to change SIGUSR2's behavior", 35);
 	send_msg(ft_atoi(av[1]), av[2]);
 	if (av[2][0] != '\0')
 		send_msg(ft_atoi(av[1]), "\n");
